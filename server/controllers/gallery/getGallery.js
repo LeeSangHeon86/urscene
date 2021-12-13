@@ -2,7 +2,7 @@ const { Gallerypost, User, Singlepost_gallerypost, Singlepost } = require("../..
 
 module.exports = async (req, res) => {
   const { galleryid } = req.params;
-  // console.log("galleryid ===", galleryid);
+  console.log("galleryid ===", galleryid);
   const gallerydata = await Gallerypost.findOne({
     include: [
       {

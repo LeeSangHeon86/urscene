@@ -27,7 +27,7 @@ function Gallery() {
   const [sceneGallery, setSceneGallery] = useState([]); // API로 받아온 갤러리 장면
 
   const handleMatchingUserAndnickName = () => {
-    if (userInfo === null) {
+    if (userInfo.nickname === "") {
       setEditDeleteModal(true);
     } else if (userInfo.nickname === nicknameGallery) {
       setEditDeleteModal(false);
@@ -72,7 +72,7 @@ function Gallery() {
 
   // 좋아요 정보 불러오는 함수
   const handleLandingLike = async () => {
-    if (userInfo === null) return;
+    if (userInfo.nickname === "") return console.log("1234");
     try {
       const result = await likeAPI.getGallery(galleryId);
       if (result === null) {
@@ -120,7 +120,7 @@ function Gallery() {
   return (
     <div>
       <div>
-        <MainNav />
+        {/* <MainNav /> */}
         <div className="gallery">
           <div className="gallerywrap">
             <div className="gallery-nickname">{nicknameGallery} 님의</div>
@@ -172,7 +172,7 @@ function Gallery() {
                     <pre>{contentGallery}</pre>
                   </div>
                   <div className="gallery-likeGroup">
-                    {userInfo === null ? null : (
+                    {userInfo.nickname === "" ? null : (
                       <div
                         className={
                           likeModal ? "gallery-like" : "gallery-unlike"
