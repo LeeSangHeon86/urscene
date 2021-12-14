@@ -9,6 +9,7 @@ import BestGallery from "../components/BestGallery";
 import GenreScene from "../components/GenreScene";
 import LoadingIndicator from "../components/LoadingIndicator";
 import mainAPI from "../api/mainAPI";
+import { useSelector } from "react-redux";
 require("dotenv").config();
 
 function Main() {
@@ -21,6 +22,9 @@ function Main() {
   const [galleryIcon] = useState([1, 2, 3]);
   const currentPage = useRef(1);
   const galleryPerPage = useRef(3);
+
+  const isLoginRedux = useSelector((state) => state.isLoginReducer);
+  console.log(isLoginRedux);
 
   const handleLandingPage = async () => {
     try {

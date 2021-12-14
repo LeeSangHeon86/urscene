@@ -6,6 +6,8 @@ import MainFooter from "../components/MainFooter";
 import TopButton from "../components/TopButton";
 import axios from "axios";
 import { MyContext } from "../contexts/Store";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../actions";
 axios.defaults.withCredentials = true;
 
 function Login() {
@@ -18,6 +20,9 @@ function Login() {
   const [emailErrMsg, setEmailErrMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [loginErrMsg, setLoginErrMsg] = useState(""); // 가입이 되지 않은 경우 에러
+
+  let isLoginRedux = useSelector((state) => state.isLoginReducer);
+  let dispatch = useDispatch();
 
   const handleInputValue = (key) => (e) => {
     setuserinfo({ ...userinfo, [key]: e.target.value });
@@ -45,7 +50,9 @@ function Login() {
         })
         .then((res) => {
           // 로그인이 성공했으니 유저 정보를 불러오고, 로그인 상태를 변경해야한다.
-          handleResponseSuccess();
+          // handleResponseSuccess();
+          dispatch(login());
+          history.push("/main");
         })
         .catch((err) => {
           setLoginErrMsg("이메일과 비밀번호를 다시 확인해 주세요.");
